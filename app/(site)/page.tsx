@@ -152,22 +152,6 @@ export default async function HomePage() {
         </section>
       ) : null}
 
-      {/* Newsletter */}
-      <section className="bg-navy py-14 text-white md:py-20">
-        <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-4 md:flex-row md:items-center md:justify-between lg:px-6">
-          <div className="max-w-xl">
-            <h2 className="text-2xl font-bold md:text-3xl">
-              Stay connected with SEEN
-            </h2>
-            <p className="mt-3 text-white/70">
-              Subscribe to our newsletter for the latest news, events, and
-              opportunities in Nepal&apos;s electrical engineering community.
-            </p>
-          </div>
-          <NewsletterForm />
-        </div>
-      </section>
-
       {/* Join CTA */}
       <section className="py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-4 text-center lg:px-6">
