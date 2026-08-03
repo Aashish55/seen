@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp /tmp/verify-seed.mjs /Users/aashishjangam/Projects/Claude/seen/scripts/verify-seed.mjs)",
+      "Bash(node /Users/aashishjangam/Projects/Claude/seen/scripts/verify-seed.mjs)",
+      "Bash(rm /Users/aashishjangam/Projects/Claude/seen/scripts/verify-seed.mjs /tmp/verify-seed.mjs)"
+    ]
+  }
+}
