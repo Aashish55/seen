@@ -117,15 +117,9 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-white/50 sm:flex-row lg:px-6">
+        <div className="mx-auto flex max-w-6xl items-center px-4 py-5 text-xs text-white/50 lg:px-6">
           <p>
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-          </p>
-          <p>
-            Built with Next.js & Sanity ·{" "}
-            <Link href="/studio" className="hover:text-white">
-              Content Studio
-            </Link>
           </p>
         </div>
       </div>
