@@ -12,7 +12,6 @@ export const siteConfig = {
   social: {
     facebook: "https://www.facebook.com/profile.php?id=100064094952027",
     linkedin: "#",
-    youtube: "#",
   },
 };
 
