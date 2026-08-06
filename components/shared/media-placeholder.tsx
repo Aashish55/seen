@@ -12,7 +12,7 @@ interface MediaThumbProps {
 
 /**
  * Renders the content image when available, otherwise an on-brand gradient
- * placeholder — so the site looks complete before any assets are uploaded.
+ * placeholder - so the site looks complete before any assets are uploaded.
  */
 export function MediaThumb({
   imageUrl,

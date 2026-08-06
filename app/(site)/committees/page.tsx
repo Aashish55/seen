@@ -10,7 +10,7 @@ import type { Committee } from "@/types/content";
 export const metadata: Metadata = {
   title: "Committees",
   description:
-    "Technical committees of SEEN — Power Systems, Renewable Energy, Smart Grid, Women in Engineering, and more.",
+    "Technical committees of SEEN - Power Systems, Renewable Energy, Smart Grid, Women in Engineering, and more.",
 };
 
 export default async function CommitteesPage() {

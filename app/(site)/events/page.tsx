@@ -24,7 +24,7 @@ export default async function EventsPage() {
     <>
       <PageHeader
         title="Events"
-        description="Seminars, workshops, conferences, and webinars — learn, network, and grow."
+        description="Seminars, workshops, conferences, and webinars - learn, network, and grow."
         crumbs={[{ label: "Events" }]}
       />
       <section className="py-14 md:py-20">
@@ -40,7 +40,7 @@ export default async function EventsPage() {
             <EmptyState
               icon={CalendarX}
               title="No upcoming events"
-              description="Check back soon — new events will show up here as they're scheduled."
+              description="Check back soon - new events will show up here as they're scheduled."
             />
           )}
         </div>

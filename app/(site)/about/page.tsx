@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn about the Society of Electrical Engineers Nepal — our history, vision, mission, leadership, and chapters.",
+    "Learn about the Society of Electrical Engineers Nepal - our history, vision, mission, leadership, and chapters.",
 };
 
 const objectives = [
@@ -70,7 +70,7 @@ export default function AboutPage() {
               <p className="text-muted-foreground">
                 Founded by a group of practicing engineers, SEEN has grown into
                 a nationwide community that champions technical excellence,
-                professional ethics, and the electrification of Nepal — from
+                professional ethics, and the electrification of Nepal - from
                 large hydropower and transmission projects to rural microgrids.
               </p>
               <h3 className="pt-2 text-xl font-semibold text-navy">History</h3>

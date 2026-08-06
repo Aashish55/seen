@@ -11,7 +11,7 @@ import type { OfficialDocument } from "@/types/content";
 export const metadata: Metadata = {
   title: "Documents",
   description:
-    "Official SEEN documents — code of ethics, membership forms, standards, guidelines, policies, and annual reports.",
+    "Official SEEN documents - code of ethics, membership forms, standards, guidelines, policies, and annual reports.",
 };
 
 export default async function DocumentsPage() {

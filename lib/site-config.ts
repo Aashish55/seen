@@ -8,7 +8,7 @@ export const siteConfig = {
   email: "info@seen.org.np",
   phone: "+977-1-4XXXXXX",
   address: "Kathmandu, Nepal",
-  officeHours: "Sunday – Friday, 10:00 AM – 5:00 PM",
+  officeHours: "Sunday - Friday, 10:00 AM - 5:00 PM",
   social: {
     facebook: "https://www.facebook.com/profile.php?id=100064094952027",
     linkedin: "#",

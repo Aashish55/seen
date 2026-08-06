@@ -1,6 +1,6 @@
 // One-off script to push the site's demo/fallback content into Sanity as
 // real documents. Run with: SANITY_WRITE_TOKEN=xxx node scripts/seed-content.mjs
-// Safe to re-run — every document uses a fixed _id and createOrReplace.
+// Safe to re-run - every document uses a fixed _id and createOrReplace.
 import { createClient } from "next-sanity";
 
 const token = process.env.SANITY_WRITE_TOKEN;
@@ -28,7 +28,7 @@ const documents = [
   {
     _id: "seed-post-agm-2083-notice",
     _type: "post",
-    title: "SEEN Annual General Meeting 2083 — Notice to All Members",
+    title: "SEEN Annual General Meeting 2083 - Notice to All Members",
     slug: { _type: "slug", current: "agm-2083-notice" },
     category: "Notice",
     excerpt:
@@ -149,14 +149,14 @@ const documents = [
   {
     _id: "seed-publication-technical-journal-vol-8",
     _type: "publication",
-    title: "SEEN Technical Journal — Vol. 8",
+    title: "SEEN Technical Journal - Vol. 8",
     category: "Technical Journal",
     publishedAt: "2026-04-01",
   },
   {
     _id: "seed-publication-newsletter-q2-2026",
     _type: "publication",
-    title: "SEEN Newsletter — Q2 2026",
+    title: "SEEN Newsletter - Q2 2026",
     category: "Newsletter",
     publishedAt: "2026-06-01",
   },
@@ -196,7 +196,7 @@ const documents = [
     name: "Renewable Energy",
     slug: { _type: "slug", current: "renewable-energy" },
     description:
-      "Solar, hydro, wind and hybrid systems — promoting clean energy adoption and technical capacity across Nepal.",
+      "Solar, hydro, wind and hybrid systems - promoting clean energy adoption and technical capacity across Nepal.",
     activities: ["Rural microgrid support", "Solar design trainings", "Policy advocacy"],
     members: [
       { _key: "chair", name: "Er. Committee Chair", role: "Coordinator" },

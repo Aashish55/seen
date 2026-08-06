@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with the Society of Electrical Engineers Nepal — address, email, phone, office hours, and contact form.",
+    "Get in touch with the Society of Electrical Engineers Nepal - address, email, phone, office hours, and contact form.",
 };
 
 const contactDetails = [

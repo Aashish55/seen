@@ -37,7 +37,7 @@ function Logo() {
     <Link
       href="/"
       className="flex min-w-0 items-center gap-2.5"
-      aria-label={`${siteConfig.name} — home`}
+      aria-label={`${siteConfig.name} - home`}
     >
       <span className="flex size-9 items-center justify-center rounded-lg bg-background">
         <Image src="/logo.png" alt="SEEN Logo" width={26} height={26} />
