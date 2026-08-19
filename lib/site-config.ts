@@ -5,9 +5,9 @@ export const siteConfig = {
   description:
     "The Society of Electrical Engineers Nepal (SEEN) is the professional body of electrical engineers in Nepal, advancing the profession through knowledge sharing, standards, advocacy, and community.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  email: "info@seen.org.np",
-  phone: "+977-1-4XXXXXX",
-  address: "Kathmandu, Nepal",
+  email: "electrical@seen.org.np",
+  phone: "+977-9843374143",
+  address: "Bagbazar Kathmandu, Krishi Bikash Bank Galli, Nepal",
   officeHours: "Sunday - Friday, 10:00 AM - 5:00 PM",
   social: {
     facebook: "https://www.facebook.com/profile.php?id=100064094952027",

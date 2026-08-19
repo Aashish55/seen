@@ -1,5 +1,17 @@
 import type { Metadata } from "next";
-import { Award, Eye, Globe2, MapPin, Target, Users } from "lucide-react";
+import { Fragment } from "react";
+import {
+  ArrowRight,
+  Award,
+  Eye,
+  Flag,
+  Globe2,
+  Lightbulb,
+  MapPin,
+  ShieldCheck,
+  Target,
+  Users,
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHeader } from "@/components/shared/page-header";
 import { SectionHeader } from "@/components/shared/section-header";
@@ -33,6 +45,51 @@ const pastPresidents = [
   { name: "Er. Past President", tenure: "2022 – 2024" },
   { name: "Er. Past President", tenure: "2020 – 2022" },
   { name: "Er. Past President", tenure: "2018 – 2020" },
+];
+
+const purposeFlow = [
+  { label: "Electrical Engineers", icon: Users },
+  { label: "Professional Excellence", icon: Award },
+  { label: "Safe & Reliable Electricity", icon: ShieldCheck },
+  { label: "Technology & Innovation", icon: Lightbulb },
+  { label: "National Development", icon: Flag },
+];
+
+const coreValues = [
+  {
+    title: "Professionalism",
+    description: "Commitment to competence, integrity, ethics, and excellence.",
+  },
+  {
+    title: "Safety",
+    description:
+      "Prioritizing human life and safety in every electrical engineering practice.",
+  },
+  {
+    title: "Innovation",
+    description:
+      "Encouraging creativity, research, technology, and forward-looking solutions.",
+  },
+  {
+    title: "Collaboration",
+    description:
+      "Building bridges among engineers, academia, industry, government, and society.",
+  },
+  {
+    title: "Sustainability",
+    description:
+      "Promoting efficient, resilient, environmentally responsible energy and electrical systems.",
+  },
+  {
+    title: "Knowledge Sharing",
+    description:
+      "Creating a culture of continuous learning and professional development.",
+  },
+  {
+    title: "National Service",
+    description:
+      "Using engineering knowledge and expertise for the advancement of Nepal.",
+  },
 ];
 
 const chapters = [
@@ -91,9 +148,7 @@ export default function AboutPage() {
                   <div>
                     <h3 className="font-semibold text-navy">Vision</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      A prosperous Nepal powered by safe, reliable, and
-                      sustainable electrical systems, engineered by a
-                      world-class profession.
+                      Excellence in Electrical Engineering for a Safe, Sustainable, Innovative and Electrified Nepal.
                     </p>
                   </div>
                 </CardContent>
@@ -106,9 +161,7 @@ export default function AboutPage() {
                   <div>
                     <h3 className="font-semibold text-navy">Mission</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      To advance the science and practice of electrical
-                      engineering in Nepal through professional development,
-                      standards, advocacy, and community.
+                      To unite, empower and advance electrical engineers through professional development, knowledge, research, collaboration and advocacy, while promoting safe, reliable, efficient and sustainable electrical engineering practices for national development.
                     </p>
                   </div>
                 </CardContent>
@@ -130,6 +183,103 @@ export default function AboutPage() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="core-values" className="scroll-mt-24 py-14 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 lg:px-6">
+          <div className="relative overflow-hidden rounded-2xl bg-navy px-6 py-10 md:px-12 md:py-12">
+            <div
+              aria-hidden
+              className="absolute -right-24 -top-24 size-64 rounded-full bg-primary/25 blur-3xl"
+            />
+            <div
+              aria-hidden
+              className="absolute -bottom-24 -left-16 size-56 rounded-full bg-electric/20 blur-3xl"
+            />
+            <div className="relative">
+              <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+                Our Purpose
+              </p>
+
+              {/* Mobile: stacked rows */}
+              <ol className="mt-8 space-y-3 md:hidden">
+                {purposeFlow.map((step, index) => (
+                  <li
+                    key={step.label}
+                    className="flex items-center gap-4 rounded-xl bg-white/5 p-4 ring-1 ring-inset ring-white/10"
+                  >
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-electric text-white shadow-md">
+                      <step.icon className="size-5" aria-hidden />
+                    </span>
+                    <div className="flex flex-1 items-center gap-2">
+                      <span className="text-xs font-bold text-white/40">
+                        0{index + 1}
+                      </span>
+                      <p className="text-sm font-semibold text-white">
+                        {step.label}
+                      </p>
+                    </div>
+                    {index < purposeFlow.length - 1 ? (
+                      <ArrowRight
+                        className="size-4 shrink-0 rotate-90 text-white/30"
+                        aria-hidden
+                      />
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+
+              {/* Desktop: horizontal flow with connecting arrows */}
+              <ol className="mt-12 hidden md:flex md:items-start">
+                {purposeFlow.map((step, index) => (
+                  <Fragment key={step.label}>
+                    <li className="flex flex-1 flex-col items-center px-2 text-center">
+                      <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-electric text-white shadow-lg ring-4 ring-navy">
+                        <step.icon className="size-6" aria-hidden />
+                      </span>
+                      <p className="mt-3 max-w-[9rem] text-sm font-semibold leading-snug text-white">
+                        {step.label}
+                      </p>
+                    </li>
+                    {index < purposeFlow.length - 1 ? (
+                      <li
+                        aria-hidden
+                        className="flex shrink-0 items-center pt-5 text-white/30"
+                      >
+                        <ArrowRight className="size-5" />
+                      </li>
+                    ) : null}
+                  </Fragment>
+                ))}
+              </ol>
+            </div>
+          </div>
+
+          <div className="mt-14 md:mt-20">
+            <SectionHeader
+              eyebrow="What Drives Us"
+              title="SEEN Core Values"
+              description="The principles that guide every engineer, program, and decision at SEEN."
+            />
+            <div className="flex flex-wrap justify-center gap-5">
+              {coreValues.map((value) => (
+                <Card
+                  key={value.title}
+                  className="w-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]"
+                >
+                  <CardContent className="">
+                    <h3 className="font-heading font-semibold text-navy">
+                      {value.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      {value.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </div>
