@@ -26,8 +26,8 @@ export function ExecutiveCommitteeMemberCard({
         )}
       </div>
       <CardContent className="p-4 text-center">
-        <p className="font-heading font-semibold text-navy">{member.name}</p>
-        <p className="mt-1 text-sm font-medium text-muted-foreground">{member.role}</p>
+        <p className="font-heading font-semibold text-navy text-xs">{member.name}</p>
+        <p className="mt-1 text-sm font-medium text-muted-foreground text-xs">{member.role}</p>
       </CardContent>
     </Card>
   );

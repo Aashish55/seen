@@ -43,6 +43,7 @@ export const upcomingEventsQuery = groq`
     date,
     endDate,
     location,
+    host,
     registrationUrl,
     description,
     "imageUrl": banner.asset->url
@@ -57,6 +58,7 @@ export const allUpcomingEventsQuery = groq`
     date,
     endDate,
     location,
+    host,
     registrationUrl,
     description,
     "imageUrl": banner.asset->url
@@ -71,6 +73,22 @@ export const allPastEventsQuery = groq`
     date,
     endDate,
     location,
+    host,
+    registrationUrl,
+    description,
+    "imageUrl": banner.asset->url
+  }
+`;
+
+export const eventBySlugQuery = groq`
+  *[_type == "event" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    date,
+    endDate,
+    location,
+    host,
     registrationUrl,
     description,
     "imageUrl": banner.asset->url
@@ -162,6 +180,15 @@ export const executiveCommitteeQuery = groq`
     name,
     role,
     "photoUrl": photo.asset->url
+  }
+`;
+
+export const pastPresidentsQuery = groq`
+  *[_type == "pastPresident"] | order(startYear desc) {
+    _id,
+    name,
+    startYear,
+    endYear
   }
 `;
 

@@ -20,6 +20,7 @@ export interface EventItem {
   date: string;
   endDate?: string;
   location?: string;
+  host?: string;
   registrationUrl?: string;
   description?: string;
   imageUrl?: string | null;
@@ -68,6 +69,13 @@ export interface ExecutiveCommitteeMember {
   name: string;
   role: string;
   photoUrl?: string | null;
+}
+
+export interface PastPresident {
+  _id: string;
+  name: string;
+  startYear: number;
+  endYear?: number;
 }
 
 export interface Partner {

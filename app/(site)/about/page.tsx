@@ -7,13 +7,11 @@ import {
   BookOpen,
   Eye,
   Flag,
-  Globe2,
   HardHat,
   Handshake,
   Landmark,
   Leaf,
   Lightbulb,
-  MapPin,
   Rocket,
   ShieldCheck,
   Target,
@@ -26,8 +24,8 @@ import { PageHeader } from "@/components/shared/page-header";
 import { SectionHeader } from "@/components/shared/section-header";
 import { siteConfig } from "@/lib/site-config";
 import { sanityFetchList } from "@/sanity/fetch";
-import { executiveCommitteeQuery } from "@/sanity/queries";
-import type { ExecutiveCommitteeMember } from "@/types/content";
+import { executiveCommitteeQuery, pastPresidentsQuery } from "@/sanity/queries";
+import type { ExecutiveCommitteeMember, PastPresident } from "@/types/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -42,12 +40,6 @@ const objectives = [
   "Represent the profession before government, industry, and academia",
   "Support students and young engineers entering the profession",
   "Strengthen international collaboration with peer societies",
-];
-
-const pastPresidents = [
-  { name: "Er. Past President", tenure: "2022 – 2024" },
-  { name: "Er. Past President", tenure: "2020 – 2022" },
-  { name: "Er. Past President", tenure: "2018 – 2020" },
 ];
 
 const purposeFlow = [
@@ -113,9 +105,10 @@ const chapters = [
 ];
 
 export default async function AboutPage() {
-  const executiveCommittee = await sanityFetchList<ExecutiveCommitteeMember>(
-    executiveCommitteeQuery
-  );
+  const [executiveCommittee, pastPresidents] = await Promise.all([
+    sanityFetchList<ExecutiveCommitteeMember>(executiveCommitteeQuery),
+    sanityFetchList<PastPresident>(pastPresidentsQuery),
+  ]);
 
   return (
     <>
@@ -132,20 +125,20 @@ export default async function AboutPage() {
               <h2 className="text-2xl font-bold text-navy md:text-3xl">
                 Introduction
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-justify">
                 The {siteConfig.name} ({siteConfig.shortName}) is the national
                 professional society of electrical engineers, uniting
                 practitioners across power systems, renewable energy,
                 electronics, automation, and emerging technologies.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-justify">
                 Founded by a group of practicing engineers, SEEN has grown into
                 a nationwide community that champions technical excellence,
                 professional ethics, and the electrification of Nepal - from
                 large hydropower and transmission projects to rural microgrids.
               </p>
               <h3 className="pt-2 text-xl font-semibold text-navy">History</h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-justify">
                 From its earliest gatherings of utility and consulting
                 engineers, the society has continuously expanded its role:
                 organizing national conferences, publishing technical journals,
@@ -202,7 +195,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section id="core-values" className="scroll-mt-24 py-14 md:py-20">
+      <section id="core-values" className="scroll-mt-24 pb-14 md:pb-20">
         <div className="mx-auto max-w-6xl px-4 lg:px-6">
           <div className="relative overflow-hidden rounded-2xl bg-navy px-6 py-10 md:px-12 md:py-12">
             <div
@@ -334,22 +327,32 @@ export default async function AboutPage() {
       <section id="past-presidents" className="scroll-mt-24 py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-4 lg:px-6">
           <SectionHeader eyebrow="Legacy" title="Past Presidents" />
-          <ol className="relative space-y-6 border-l-2 border-primary/30 pl-6">
-            {pastPresidents.map((president, index) => (
-              <li key={index} className="relative">
-                <span
-                  aria-hidden
-                  className="absolute -left-[31px] top-1.5 size-3 rounded-full bg-primary"
-                />
-                <p className="font-semibold text-navy">{president.name}</p>
-                <p className="text-sm text-muted-foreground">{president.tenure}</p>
-              </li>
-            ))}
-          </ol>
+          {pastPresidents.length ? (
+            <ol className="relative space-y-6 border-l-2 border-primary/30 pl-6">
+              {pastPresidents.map((president) => (
+                <li key={president._id} className="relative">
+                  <span
+                    aria-hidden
+                    className="absolute -left-[31px] top-1.5 size-3 rounded-full bg-primary"
+                  />
+                  <p className="font-semibold text-navy">{president.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {president.startYear} – {president.endYear ?? "Present"}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <EmptyState
+              icon={Users}
+              title="No past presidents listed yet"
+              description="Past presidents will appear here once added in the Studio."
+            />
+          )}
         </div>
       </section>
 
-      <section id="chapters" className="scroll-mt-24 border-y bg-card py-14 md:py-20">
+      {/* <section id="chapters" className="scroll-mt-24 border-y bg-card py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-4 lg:px-6">
           <SectionHeader
             eyebrow="Nationwide Presence"
@@ -379,7 +382,7 @@ export default async function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
