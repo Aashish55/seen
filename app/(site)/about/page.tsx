@@ -3,19 +3,31 @@ import { Fragment } from "react";
 import {
   ArrowRight,
   Award,
+  BadgeCheck,
+  BookOpen,
   Eye,
   Flag,
   Globe2,
+  HardHat,
+  Handshake,
+  Landmark,
+  Leaf,
   Lightbulb,
   MapPin,
+  Rocket,
   ShieldCheck,
   Target,
   Users,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { EmptyState } from "@/components/shared/empty-state";
+import { ExecutiveCommitteeMemberCard } from "@/components/cards/executive-committee-member-card";
 import { PageHeader } from "@/components/shared/page-header";
 import { SectionHeader } from "@/components/shared/section-header";
 import { siteConfig } from "@/lib/site-config";
+import { sanityFetchList } from "@/sanity/fetch";
+import { executiveCommitteeQuery } from "@/sanity/queries";
+import type { ExecutiveCommitteeMember } from "@/types/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -30,15 +42,6 @@ const objectives = [
   "Represent the profession before government, industry, and academia",
   "Support students and young engineers entering the profession",
   "Strengthen international collaboration with peer societies",
-];
-
-const executiveCommittee = [
-  { name: "Er. President Name", role: "President" },
-  { name: "Er. VP Name", role: "Vice President" },
-  { name: "Er. Secretary Name", role: "General Secretary" },
-  { name: "Er. Treasurer Name", role: "Treasurer" },
-  { name: "Er. Member Name", role: "Executive Member" },
-  { name: "Er. Member Name", role: "Executive Member" },
 ];
 
 const pastPresidents = [
@@ -57,35 +60,42 @@ const purposeFlow = [
 
 const coreValues = [
   {
+    icon: BadgeCheck,
     title: "Professionalism",
     description: "Commitment to competence, integrity, ethics, and excellence.",
   },
   {
+    icon: HardHat,
     title: "Safety",
     description:
       "Prioritizing human life and safety in every electrical engineering practice.",
   },
   {
+    icon: Rocket,
     title: "Innovation",
     description:
       "Encouraging creativity, research, technology, and forward-looking solutions.",
   },
   {
+    icon: Handshake,
     title: "Collaboration",
     description:
       "Building bridges among engineers, academia, industry, government, and society.",
   },
   {
+    icon: Leaf,
     title: "Sustainability",
     description:
       "Promoting efficient, resilient, environmentally responsible energy and electrical systems.",
   },
   {
+    icon: BookOpen,
     title: "Knowledge Sharing",
     description:
       "Creating a culture of continuous learning and professional development.",
   },
   {
+    icon: Landmark,
     title: "National Service",
     description:
       "Using engineering knowledge and expertise for the advancement of Nepal.",
@@ -102,7 +112,11 @@ const chapters = [
   "Sudurpashchim Province",
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const executiveCommittee = await sanityFetchList<ExecutiveCommitteeMember>(
+    executiveCommitteeQuery
+  );
+
   return (
     <>
       <PageHeader
@@ -264,21 +278,27 @@ export default function AboutPage() {
               title="SEEN Core Values"
               description="The principles that guide every engineer, program, and decision at SEEN."
             />
-            <div className="flex flex-wrap justify-center gap-5">
-              {coreValues.map((value) => (
-                <Card
+            <div className="border-t border-border">
+              {coreValues.map((value, index) => (
+                <div
                   key={value.title}
-                  className="w-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]"
+                  className="group grid gap-4 border-b border-border px-2 py-7 transition-colors duration-300 hover:bg-card md:grid-cols-[5rem_14rem_1fr] md:items-center md:gap-8 md:px-4"
                 >
-                  <CardContent className="">
-                    <h3 className="font-heading font-semibold text-navy">
-                      {value.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                      {value.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                  <div className="flex items-center gap-3">
+                    <span className="font-heading text-2xl font-bold text-primary/20 transition-colors duration-300 group-hover:text-primary/40 md:text-3xl">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
+                      <value.icon className="size-5" aria-hidden />
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-semibold text-navy md:text-lg">
+                    {value.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {value.description}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
@@ -292,21 +312,22 @@ export default function AboutPage() {
             title="Executive Committee"
             description="The elected leadership steering the society's strategy and programs."
           />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {executiveCommittee.map((member, index) => (
-              <Card key={`${member.role}-${index}`}>
-                <CardContent className="flex items-center gap-4 p-5">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-navy text-white">
-                    <Users className="size-5" aria-hidden />
-                  </span>
-                  <div>
-                    <p className="font-semibold text-navy">{member.name}</p>
-                    <p className="text-sm text-primary">{member.role}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {executiveCommittee.length ? (
+            <div className="space-y-10">
+              <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
+                {executiveCommittee
+                  .map((member) => (
+                    <ExecutiveCommitteeMemberCard key={member._id} member={member} />
+                  ))}
+              </div>
+            </div>
+          ) : (
+            <EmptyState
+              icon={Users}
+              title="No committee members listed yet"
+              description="The executive committee will appear here once added in the Studio."
+            />
+          )}
         </div>
       </section>
 

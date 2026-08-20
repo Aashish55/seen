@@ -156,6 +156,15 @@ export const committeeBySlugQuery = groq`
   }
 `;
 
+export const executiveCommitteeQuery = groq`
+  *[_type == "executiveCommitteeMember"] | order(order asc) {
+    _id,
+    name,
+    role,
+    "photoUrl": photo.asset->url
+  }
+`;
+
 export const partnersQuery = groq`
   *[_type == "partner"] | order(name asc) {
     _id,

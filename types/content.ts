@@ -63,6 +63,13 @@ export interface Committee {
   activities?: string[];
 }
 
+export interface ExecutiveCommitteeMember {
+  _id: string;
+  name: string;
+  role: string;
+  photoUrl?: string | null;
+}
+
 export interface Partner {
   _id: string;
   name: string;
