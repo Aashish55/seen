@@ -10,7 +10,6 @@ import { siteConfig } from "@/lib/site-config";
 const exploreLinks = [
   { label: "About SEEN", href: "/about" },
   { label: "Membership", href: "/membership" },
-  { label: "Committees", href: "/committees" },
   { label: "Projects", href: "/projects" },
   { label: "Gallery", href: "/gallery" },
 ];

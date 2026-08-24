@@ -150,30 +150,6 @@ export const publicationsQuery = groq`
   }
 `;
 
-export const committeesQuery = groq`
-  *[_type == "committee"] | order(name asc) {
-    _id,
-    name,
-    "slug": slug.current,
-    description,
-    "imageUrl": image.asset->url,
-    members,
-    activities
-  }
-`;
-
-export const committeeBySlugQuery = groq`
-  *[_type == "committee" && slug.current == $slug][0] {
-    _id,
-    name,
-    "slug": slug.current,
-    description,
-    "imageUrl": image.asset->url,
-    members,
-    activities
-  }
-`;
-
 export const executiveCommitteeQuery = groq`
   *[_type == "executiveCommitteeMember"] | order(order asc) {
     _id,

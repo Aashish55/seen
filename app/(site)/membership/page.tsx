@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
-  ArrowRight,
   BadgeCheck,
   BookOpen,
   Building2,
@@ -10,11 +8,10 @@ import {
   Network,
   Users,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHeader } from "@/components/shared/page-header";
 import { SectionHeader } from "@/components/shared/section-header";
-import { siteConfig } from "@/lib/site-config";
+import { MembershipApplicationForm } from "@/components/membership/membership-application-form";
 
 export const metadata: Metadata = {
   title: "Membership",
@@ -107,49 +104,40 @@ export default function MembershipPage() {
       </section>
 
       <section id="apply" className="scroll-mt-24 border-t bg-navy py-14 text-white md:py-20">
-        <div className="mx-auto max-w-6xl px-4 lg:px-6">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div>
-              <h2 className="text-2xl font-bold md:text-3xl">Apply Online</h2>
-              <p className="mt-3 text-white/75">
-                Ready to join? Download the membership form, fill in your
-                details, and email it with your documents to{" "}
-                <a href={`mailto:${siteConfig.email}`} className="text-electric brightness-150 underline">
-                  {siteConfig.email}
-                </a>
-                . An online application portal is coming soon.
-              </p>
-              <ul className="mt-5 space-y-2 text-sm text-white/75">
-                {[
-                  "Completed application form",
-                  "Copy of academic certificates",
-                  "NEC registration certificate",
-                  "Passport-size photo",
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="size-4 text-emerald-400" aria-hidden />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
-              <Button asChild size="lg" variant="secondary">
-                <Link href="/documents">
-                  Download Forms
-                  <ArrowRight className="size-4" aria-hidden />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
-              >
-                <Link href="/contact">Ask a Question</Link>
-              </Button>
-            </div>
+        <div className="mx-auto max-w-4xl px-4 lg:px-6">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold md:text-3xl">Apply Online</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-white/75">
+              Fill out the new member registration form below and upload your
+              documents to apply for SEEN Life Membership (NPR 3,100,
+              one-time).
+            </p>
+            <ul className="mx-auto mt-5 flex flex-col max-w-2xl flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm text-white/75">
+              {[
+                "Citizenship",
+                "Payment voucher/slip (NPR 3,100)",
+                "Recent passport/stamp size photo",
+                "NEC registration certificate/council license",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2.5">
+                  <CheckCircle2 className="size-4 text-emerald-400" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
+          <Card className="mt-10 text-foreground">
+            <CardContent className="p-6 md:p-8">
+              <h3 className="text-lg font-bold text-navy">
+                New Member Registration Form
+              </h3>
+              <p className="mt-1 mb-6 text-sm text-muted-foreground">
+                Fields marked with <span className="text-destructive">*</span> are
+                required.
+              </p>
+              <MembershipApplicationForm />
+            </CardContent>
+          </Card>
         </div>
       </section>
     </>

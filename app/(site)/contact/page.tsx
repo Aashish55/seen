@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { FacebookIcon } from "@/components/shared/social-icons";
-import { ContactForm } from "@/components/contact/contact-form";
 import { PageHeader } from "@/components/shared/page-header";
 import { siteConfig } from "@/lib/site-config";
 
@@ -63,6 +62,9 @@ export default function ContactPage() {
               <FacebookIcon />
               Follow us on Facebook
             </a>
+          </div>
+          <div className="lg:col-span-3">
+            <h2 className="mb-6 text-xl font-bold text-navy">Find Us on the Map</h2>
             <div className="overflow-hidden rounded-xl border">
               <iframe
                 title="SEEN office location on Google Maps"
@@ -72,10 +74,6 @@ export default function ContactPage() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-          </div>
-          <div className="lg:col-span-3">
-            <h2 className="mb-6 text-xl font-bold text-navy">Send us a message</h2>
-            <ContactForm />
           </div>
         </div>
       </section>

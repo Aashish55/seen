@@ -1,4 +1,3 @@
-import { committee } from "./committee";
 import { event } from "./event";
 import { executiveCommitteeMember } from "./executive-committee-member";
 import { galleryAlbum } from "./gallery-album";
@@ -14,7 +13,6 @@ export const schemaTypes = [
   event,
   project,
   publication,
-  committee,
   executiveCommitteeMember,
   pastPresident,
   partner,

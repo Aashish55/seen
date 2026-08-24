@@ -49,21 +49,6 @@ export interface Publication {
   fileUrl?: string | null;
 }
 
-export interface CommitteeMember {
-  name: string;
-  role?: string;
-}
-
-export interface Committee {
-  _id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  imageUrl?: string | null;
-  members?: CommitteeMember[];
-  activities?: string[];
-}
-
 export interface ExecutiveCommitteeMember {
   _id: string;
   name: string;
