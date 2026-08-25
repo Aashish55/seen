@@ -12,6 +12,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PageHeader } from "@/components/shared/page-header";
 import { SectionHeader } from "@/components/shared/section-header";
 import { MembershipApplicationForm } from "@/components/membership/membership-application-form";
+import { LifeMembersSection } from "@/components/membership/life-members";
+import { formatMemberCount, getLifeMembers } from "@/lib/membership";
 
 export const metadata: Metadata = {
   title: "Membership",
@@ -29,16 +31,21 @@ const membershipType = {
   requirements: "Nepal Engineering Council (NEC) registered electrical engineer.",
 };
 
-const benefits = [
-  { icon: Network, text: "Professional network of 1,200+ engineers across Nepal" },
-  { icon: BookOpen, text: "Free access to journals, publications, and technical archives" },
-  { icon: Users, text: "Discounted registration for conferences, workshops, and trainings" },
-  { icon: BadgeCheck, text: "Recognition, awards, and professional endorsement" },
-  { icon: GraduationCap, text: "CPD opportunities and mentorship programs" },
-  { icon: Building2, text: "Voice in national standards and policy advocacy" },
-];
+export default async function MembershipPage() {
+  const { members, count } = await getLifeMembers();
 
-export default function MembershipPage() {
+  const benefits = [
+    {
+      icon: Network,
+      text: `Professional network of ${formatMemberCount(count)} engineers across Nepal`,
+    },
+    { icon: BookOpen, text: "Free access to journals, publications, and technical archives" },
+    { icon: Users, text: "Discounted registration for conferences, workshops, and trainings" },
+    { icon: BadgeCheck, text: "Recognition, awards, and professional endorsement" },
+    { icon: GraduationCap, text: "CPD opportunities and mentorship programs" },
+    { icon: Building2, text: "Voice in national standards and policy advocacy" },
+  ];
+
   return (
     <>
       <PageHeader
@@ -55,8 +62,8 @@ export default function MembershipPage() {
             description="One membership, for life - open to NEC-registered electrical engineers."
           />
           <Card>
-            <CardContent className="flex flex-col gap-8 p-8 sm:flex-row sm:items-center sm:justify-between md:p-10">
-              <div className="flex items-start gap-4">
+            <CardContent className="flex flex-col gap-8 p-8 sm:flex-row sm:items-center md:p-10">
+              <div className="flex items-start gap-4 sm:flex-1">
                 <span className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
                   <membershipType.icon className="size-6" aria-hidden />
                 </span>
@@ -67,7 +74,7 @@ export default function MembershipPage() {
                   </p>
                 </div>
               </div>
-              <div className="border-t pt-6 text-left sm:border-t-0 sm:border-l sm:pl-8 sm:pt-0 sm:text-right">
+              <div className="border-t pt-6 text-left sm:flex-1 sm:border-t-0 sm:border-l sm:pl-8 sm:pt-0 sm:text-right">
                 <p className="flex items-baseline gap-1.5 sm:justify-end">
                   <span className="text-4xl font-bold text-primary">
                     {membershipType.fee}
@@ -81,6 +88,7 @@ export default function MembershipPage() {
                   {membershipType.requirements}
                 </p>
               </div>
+              <LifeMembersSection members={members} count={count} className="sm:flex-1" />
             </CardContent>
           </Card>
         </div>

@@ -16,6 +16,9 @@ const CONFIG = {
 
   // Google Drive folder ID where uploaded files will be stored
   DRIVE_FOLDER_ID: "1q5Zai0vAeLYLvE0exihHZlUAYfHWriMw",
+
+  // Exact sheet/tab name for the published Life Members registry (doGet)
+  LM_LIST_SHEET_NAME: "LM LIST",
 };
 
 // Column order the sheet is expected to have. If the sheet is empty, the
@@ -41,12 +44,69 @@ const HEADERS = [
 
 /**
  * GET
- * Used for testing whether the Apps Script is running.
+ *
+ * Returns the published Life Members list (first/last name only) from the
+ * LM_LIST_SHEET_NAME sheet, for display on the public /membership page.
+ *
+ * Response:
+ * { "success": true, "count": 1532, "members": [{ "firstName": "...", "lastName": "..." }, ...] }
  */
 function doGet() {
+  const spreadsheet = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+
+  const sheet = spreadsheet.getSheetByName(CONFIG.LM_LIST_SHEET_NAME);
+
+  if (!sheet) {
+    return jsonResponse({
+      success: false,
+      error: 'Sheet "' + CONFIG.LM_LIST_SHEET_NAME + '" not found',
+    });
+  }
+
+  const data = sheet.getDataRange().getValues();
+
+  // Find the table header row automatically
+  const headerRowIndex = data.findIndex(function (row) {
+    return row.includes("S. No.") && row.includes("ID") && row.includes("First Name");
+  });
+
+  if (headerRowIndex === -1) {
+    return jsonResponse({
+      success: false,
+      error: "Table header row not found",
+    });
+  }
+
+  const headers = data[headerRowIndex];
+
+  const firstNameIndex = headers.indexOf("First Name");
+  const lastNameIndex = headers.indexOf("Sur Name");
+
+  if (firstNameIndex === -1 || lastNameIndex === -1) {
+    return jsonResponse({
+      success: false,
+      error: "First Name or Sur Name column not found",
+    });
+  }
+
+  const members = data
+    .slice(headerRowIndex + 1)
+    .filter(function (row) {
+      return row.some(function (cell) {
+        return cell !== "";
+      });
+    })
+    .map(function (row) {
+      return {
+        firstName: row[firstNameIndex] || "",
+        lastName: row[lastNameIndex] || "",
+      };
+    });
+
   return jsonResponse({
     success: true,
-    message: "Membership API is running",
+    count: members.length,
+    members: members,
   });
 }
 

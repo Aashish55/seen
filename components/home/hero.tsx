@@ -2,14 +2,15 @@ import Link from "next/link";
 import { ArrowRight, CalendarDays, FileText, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
+import { formatMemberCount } from "@/lib/membership";
 
-const stats = [
-  { icon: Users, value: "1,200+", label: "Member Engineers" },
-  { icon: CalendarDays, value: "40+", label: "Events per Year" },
-  { icon: FileText, value: "25+", label: "Publications" },
-];
+export function Hero({ memberCount }: { memberCount: number }) {
+  const stats = [
+    { icon: Users, value: formatMemberCount(memberCount), label: "Member Engineers" },
+    { icon: CalendarDays, value: "40+", label: "Events per Year" },
+    { icon: FileText, value: "25+", label: "Publications" },
+  ];
 
-export function Hero() {
   return (
     <section className="relative overflow-hidden bg-navy text-white">
       <div

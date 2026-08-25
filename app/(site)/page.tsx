@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Camera } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/home/hero";
 import { NewsletterForm } from "@/components/home/newsletter-form";
 import { Partners } from "@/components/home/partners";
@@ -7,8 +7,10 @@ import { NewsCard } from "@/components/cards/news-card";
 import { EventCard } from "@/components/cards/event-card";
 import { ProjectCard } from "@/components/cards/project-card";
 import { PublicationCard } from "@/components/cards/publication-card";
+import { GalleryPreview } from "@/components/gallery/gallery-preview";
 import { SectionHeader } from "@/components/shared/section-header";
 import { sanityFetchList } from "@/sanity/fetch";
+import { getLifeMembers } from "@/lib/membership";
 import {
   featuredProjectsQuery,
   galleryQuery,
@@ -27,7 +29,7 @@ import type {
 } from "@/types/content";
 
 export default async function HomePage() {
-  const [news, events, projects, publications, partners, gallery] =
+  const [news, events, projects, publications, partners, gallery, { count: memberCount }] =
     await Promise.all([
       sanityFetchList<NewsPost>(latestPostsQuery, { params: { limit: 3 } }),
       sanityFetchList<EventItem>(upcomingEventsQuery, { params: { limit: 3 } }),
@@ -35,11 +37,12 @@ export default async function HomePage() {
       sanityFetchList<Publication>(publicationsQuery),
       sanityFetchList<Partner>(partnersQuery),
       sanityFetchList<GalleryAlbum>(galleryQuery),
+      getLifeMembers(),
     ]);
 
   return (
     <>
-      <Hero />
+      <Hero memberCount={memberCount} />
 
       {/* Latest news */}
       {news.length ? (
@@ -126,23 +129,7 @@ export default async function HomePage() {
         <section className="py-14 md:py-20">
           <div className="mx-auto max-w-6xl px-4 lg:px-6">
             <SectionHeader eyebrow="Moments" title="Gallery" href="/gallery" />
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-              {gallery.slice(0, 6).map((album) => (
-                <Link
-                  key={album._id}
-                  href="/gallery"
-                  className="group relative flex aspect-[4/3] items-end overflow-hidden rounded-xl bg-gradient-to-br from-navy via-navy-light to-primary/60 p-4"
-                >
-                  <Camera
-                    className="absolute right-4 top-4 size-6 text-white/40"
-                    aria-hidden
-                  />
-                  <span className="text-sm font-semibold text-white drop-shadow group-hover:underline">
-                    {album.title}
-                  </span>
-                </Link>
-              ))}
-            </div>
+            <GalleryPreview albums={gallery.slice(0, 6)} />
           </div>
         </section>
       ) : null}

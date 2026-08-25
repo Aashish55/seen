@@ -6,6 +6,11 @@ Next.js server, since file uploads can be larger than most hosting
 platforms allow in a single serverless request). The script appends a row
 to a Google Sheet and saves the uploaded documents to Drive.
 
+The same Web App's `doGet` also serves the public Life Members list shown
+on `/membership` — it reads the `LM LIST` sheet (a separate, already
+curated membership registry, not the form-response sheet above) and
+returns only each member's first and last name.
+
 This is a **standalone** Apps Script (not bound to the spreadsheet) — it
 targets the sheet/folder via the IDs in the `CONFIG` object at the top of
 `Code.gs`, so it can be deployed from any Google account with access to
@@ -22,6 +27,8 @@ those resources.
    - `SPREADSHEET_ID` — the response spreadsheet's ID
    - `SHEET_NAME` — the exact tab name (currently `Website Form Response`)
    - `DRIVE_FOLDER_ID` — the Drive folder uploaded documents are saved into
+   - `LM_LIST_SHEET_NAME` — the tab name for the Life Members registry
+     (currently `LM LIST`), read by `doGet`
 4. Make sure the sheet named in `SHEET_NAME` exists. If it's empty, the
    script writes the header row from the `HEADERS` array automatically on
    first submission.
@@ -55,3 +62,10 @@ those resources.
   text — `fullName`, `permanentAddress`, `recentAddress`, `email`,
   `email2`, `phone`, `bloodGroup`, `company`, `referredBy`; files —
   `photo`, `paymentVoucher`, `citizenship`, `necCertificate`.
+- `doGet` expects the `LM_LIST_SHEET_NAME` sheet to have a header row
+  somewhere in the sheet containing `S. No.`, `ID`, and `First Name`
+  columns (it's found automatically, so rows above it can hold titles or
+  notes), plus a `Sur Name` column. Only `First Name` and `Sur Name` are
+  ever returned — no other column in that sheet is exposed publicly, so
+  it's safe to keep contact details, addresses, or other member info in
+  further columns.
