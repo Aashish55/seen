@@ -1,7 +1,17 @@
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { UrgentNoticePopup } from "@/components/shared/urgent-notice-popup";
+import { sanityFetchOne } from "@/sanity/fetch";
+import { urgentNoticeQuery } from "@/sanity/queries";
+import type { UrgentNotice } from "@/types/content";
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const notice = await sanityFetchOne<UrgentNotice>(urgentNoticeQuery);
+
   return (
     <div className="flex min-h-dvh flex-col">
       <a
@@ -15,6 +25,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         {children}
       </main>
       <SiteFooter />
+      {notice ? <UrgentNoticePopup notice={notice} /> : null}
     </div>
   );
 }

@@ -77,6 +77,15 @@ export interface GalleryAlbum {
   images: { url: string; alt?: string }[];
 }
 
+export interface UrgentNotice {
+  _id: string;
+  title: string;
+  description?: string;
+  fileUrl?: string | null;
+  fileType?: string | null;
+  fileName?: string | null;
+}
+
 export interface OfficialDocument {
   _id: string;
   title: string;

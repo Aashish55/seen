@@ -186,6 +186,17 @@ export const galleryQuery = groq`
   }
 `;
 
+export const urgentNoticeQuery = groq`
+  *[_type == "urgentNotice" && active == true] | order(_updatedAt desc)[0] {
+    _id,
+    title,
+    description,
+    "fileUrl": file.asset->url,
+    "fileType": file.asset->mimeType,
+    "fileName": file.asset->originalFilename
+  }
+`;
+
 export const documentsQuery = groq`
   *[_type == "officialDocument"] | order(category asc, title asc) {
     _id,

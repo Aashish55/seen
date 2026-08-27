@@ -7,6 +7,7 @@ import { pastPresident } from "./past-president";
 import { post } from "./post";
 import { project } from "./project";
 import { publication } from "./publication";
+import { urgentNotice } from "./urgent-notice";
 
 export const schemaTypes = [
   post,
@@ -18,4 +19,5 @@ export const schemaTypes = [
   partner,
   galleryAlbum,
   officialDocument,
+  urgentNotice,
 ];
