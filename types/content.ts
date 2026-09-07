@@ -50,10 +50,16 @@ export interface Publication {
 }
 
 export interface ExecutiveCommitteeMember {
-  _id: string;
   name: string;
   role: string;
   photoUrl?: string | null;
+}
+
+export interface ExecutiveCommittee {
+  _id: string;
+  startYear: number;
+  endYear: number;
+  members: ExecutiveCommitteeMember[];
 }
 
 export interface PastPresident {

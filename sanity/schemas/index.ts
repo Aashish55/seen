@@ -1,5 +1,5 @@
 import { event } from "./event";
-import { executiveCommitteeMember } from "./executive-committee-member";
+import { executiveCommittee } from "./executive-committee";
 import { galleryAlbum } from "./gallery-album";
 import { officialDocument } from "./official-document";
 import { partner } from "./partner";
@@ -14,7 +14,7 @@ export const schemaTypes = [
   event,
   project,
   publication,
-  executiveCommitteeMember,
+  executiveCommittee,
   pastPresident,
   partner,
   galleryAlbum,

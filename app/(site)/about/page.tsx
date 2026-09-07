@@ -19,13 +19,13 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/shared/empty-state";
-import { ExecutiveCommitteeMemberCard } from "@/components/cards/executive-committee-member-card";
+import { ExecutiveCommitteeSection } from "@/components/shared/executive-committee-section";
 import { PageHeader } from "@/components/shared/page-header";
 import { SectionHeader } from "@/components/shared/section-header";
 import { siteConfig } from "@/lib/site-config";
 import { sanityFetchList } from "@/sanity/fetch";
-import { executiveCommitteeQuery, pastPresidentsQuery } from "@/sanity/queries";
-import type { ExecutiveCommitteeMember, PastPresident } from "@/types/content";
+import { executiveCommitteesQuery, pastPresidentsQuery } from "@/sanity/queries";
+import type { ExecutiveCommittee, PastPresident } from "@/types/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -105,8 +105,8 @@ const chapters = [
 ];
 
 export default async function AboutPage() {
-  const [executiveCommittee, pastPresidents] = await Promise.all([
-    sanityFetchList<ExecutiveCommitteeMember>(executiveCommitteeQuery),
+  const [committees, pastPresidents] = await Promise.all([
+    sanityFetchList<ExecutiveCommittee>(executiveCommitteesQuery),
     sanityFetchList<PastPresident>(pastPresidentsQuery),
   ]);
 
@@ -300,27 +300,7 @@ export default async function AboutPage() {
 
       <section id="executive-committee" className="scroll-mt-24 border-y bg-card py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-4 lg:px-6">
-          <SectionHeader
-            eyebrow="Leadership"
-            title="Executive Committee"
-            description="The elected leadership steering the society's strategy and programs."
-          />
-          {executiveCommittee.length ? (
-            <div className="space-y-10">
-              <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
-                {executiveCommittee
-                  .map((member) => (
-                    <ExecutiveCommitteeMemberCard key={member._id} member={member} />
-                  ))}
-              </div>
-            </div>
-          ) : (
-            <EmptyState
-              icon={Users}
-              title="No committee members listed yet"
-              description="The executive committee will appear here once added in the Studio."
-            />
-          )}
+          <ExecutiveCommitteeSection committees={committees} />
         </div>
       </section>
 
@@ -337,7 +317,7 @@ export default async function AboutPage() {
                   />
                   <p className="font-semibold text-navy">{president.name}</p>
                   <p className="text-sm text-muted-foreground">
-                    {president.startYear} – {president.endYear ?? "Present"}
+                    {president.startYear} - {president.endYear ?? "Present"}
                   </p>
                 </li>
               ))}

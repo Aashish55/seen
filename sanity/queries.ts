@@ -150,12 +150,12 @@ export const publicationsQuery = groq`
   }
 `;
 
-export const executiveCommitteeQuery = groq`
-  *[_type == "executiveCommitteeMember"] | order(order asc) {
+export const executiveCommitteesQuery = groq`
+  *[_type == "executiveCommittee"] | order(endYear desc) {
     _id,
-    name,
-    role,
-    "photoUrl": photo.asset->url
+    startYear,
+    endYear,
+    "members": coalesce(members[]{ name, role, "photoUrl": photo.asset->url }, [])
   }
 `;
 
