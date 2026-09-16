@@ -14,6 +14,9 @@ import { SectionHeader } from "@/components/shared/section-header";
 import { MembershipApplicationForm } from "@/components/membership/membership-application-form";
 import { LifeMembersSection } from "@/components/membership/life-members";
 import { formatMemberCount, getLifeMembers } from "@/lib/membership";
+import { sanityFetchOne } from "@/sanity/fetch";
+import { paymentAccountQuery } from "@/sanity/queries";
+import type { PaymentAccount } from "@/types/content";
 
 export const metadata: Metadata = {
   title: "Membership",
@@ -33,6 +36,7 @@ const membershipType = {
 
 export default async function MembershipPage() {
   const { members, count } = await getLifeMembers();
+  const paymentAccount = await sanityFetchOne<PaymentAccount>(paymentAccountQuery);
 
   const benefits = [
     {
@@ -112,7 +116,7 @@ export default async function MembershipPage() {
       </section>
 
       <section id="apply" className="scroll-mt-24 border-t bg-navy py-14 text-white md:py-20">
-        <div className="mx-auto max-w-4xl px-4 lg:px-6">
+        <div className="mx-auto max-w-5xl px-4 lg:px-6">
           <div className="text-center">
             <h2 className="text-2xl font-bold md:text-3xl">Apply Online</h2>
             <p className="mx-auto mt-3 max-w-2xl text-white/75">
@@ -143,7 +147,7 @@ export default async function MembershipPage() {
                 Fields marked with <span className="text-destructive">*</span> are
                 required.
               </p>
-              <MembershipApplicationForm />
+              <MembershipApplicationForm paymentAccount={paymentAccount} />
             </CardContent>
           </Card>
         </div>

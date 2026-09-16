@@ -205,3 +205,15 @@ export const documentsQuery = groq`
     "fileUrl": pdf.asset->url
   }
 `;
+
+export const paymentAccountQuery = groq`
+  *[_type == "paymentAccount" && active == true] | order(_updatedAt desc)[0] {
+    _id,
+    title,
+    "qrImageUrl": qrImage.asset->url,
+    accountName,
+    accountNumber,
+    bankName,
+    instructions
+  }
+`;

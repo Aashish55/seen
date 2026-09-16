@@ -6,7 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import type { PaymentAccount } from "@/types/content";
+import { PaymentQrCard } from "./payment-qr-card";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -121,7 +124,11 @@ function FileField({ spec }: { spec: FileFieldSpec }) {
   );
 }
 
-export function MembershipApplicationForm() {
+interface MembershipApplicationFormProps {
+  paymentAccount: PaymentAccount | null;
+}
+
+export function MembershipApplicationForm({ paymentAccount }: MembershipApplicationFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -228,91 +235,97 @@ export function MembershipApplicationForm() {
         className="sr-only"
         aria-hidden
       />
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+        <div className="min-w-0 flex-1 space-y-6">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="membership-fullName">
+                Full name <span aria-hidden className="text-destructive">*</span>
+              </Label>
+              <Input id="membership-fullName" name="fullName" required autoComplete="name" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="membership-phone">
+                Phone Number <span aria-hidden className="text-destructive">*</span>
+              </Label>
+              <Input id="membership-phone" name="phone" type="tel" required autoComplete="tel" />
+            </div>
+          </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
-          <Label htmlFor="membership-fullName">
-            Full name <span aria-hidden className="text-destructive">*</span>
-          </Label>
-          <Input id="membership-fullName" name="fullName" required autoComplete="name" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="membership-phone">
-            Phone Number <span aria-hidden className="text-destructive">*</span>
-          </Label>
-          <Input id="membership-phone" name="phone" type="tel" required autoComplete="tel" />
-        </div>
-      </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="membership-permanentAddress">
+                Permanent Address <span aria-hidden className="text-destructive">*</span>
+              </Label>
+              <Input id="membership-permanentAddress" name="permanentAddress" required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="membership-recentAddress">
+                Recent Address <span aria-hidden className="text-destructive">*</span>
+              </Label>
+              <Input id="membership-recentAddress" name="recentAddress" required />
+            </div>
+          </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
-          <Label htmlFor="membership-permanentAddress">
-            Permanent Address <span aria-hidden className="text-destructive">*</span>
-          </Label>
-          <Input id="membership-permanentAddress" name="permanentAddress" required />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="membership-recentAddress">
-            Recent Address <span aria-hidden className="text-destructive">*</span>
-          </Label>
-          <Input id="membership-recentAddress" name="recentAddress" required />
-        </div>
-      </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="membership-email">
+                Email Address <span aria-hidden className="text-destructive">*</span>
+              </Label>
+              <Input id="membership-email" name="email" type="email" required autoComplete="email" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="membership-email2">Email-02 (Optional)</Label>
+              <Input id="membership-email2" name="email2" type="email" />
+            </div>
+          </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
-          <Label htmlFor="membership-email">
-            Email Address <span aria-hidden className="text-destructive">*</span>
-          </Label>
-          <Input id="membership-email" name="email" type="email" required autoComplete="email" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="membership-email2">Email-02 (Optional)</Label>
-          <Input id="membership-email2" name="email2" type="email" />
-        </div>
-      </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="membership-bloodGroup">
+                Blood Group <span aria-hidden className="text-destructive">*</span>
+              </Label>
+              <select
+                id="membership-bloodGroup"
+                name="bloodGroup"
+                required
+                defaultValue=""
+                className={cn(
+                  "h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm dark:bg-input/30"
+                )}
+              >
+                <option value="" disabled>
+                  Select blood group
+                </option>
+                {BLOOD_GROUPS.map((group) => (
+                  <option key={group} value={group}>
+                    {group}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="membership-referredBy">
+                Referred By (SEEN LIFE Member Name)
+              </Label>
+              <Input id="membership-referredBy" name="referredBy" />
+            </div>
+          </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
-          <Label htmlFor="membership-bloodGroup">
-            Blood Group <span aria-hidden className="text-destructive">*</span>
-          </Label>
-          <select
-            id="membership-bloodGroup"
-            name="bloodGroup"
-            required
-            defaultValue=""
-            className={cn(
-              "h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm dark:bg-input/30"
-            )}
-          >
-            <option value="" disabled>
-              Select blood group
-            </option>
-            {BLOOD_GROUPS.map((group) => (
-              <option key={group} value={group}>
-                {group}
-              </option>
-            ))}
-          </select>
+          <div className="space-y-2">
+            <Label htmlFor="membership-company">
+              Company Associated with{" "}
+              <span className="font-normal text-muted-foreground">
+                (please fill complete detail)
+              </span>{" "}
+              <span aria-hidden className="text-destructive">*</span>
+            </Label>
+            <Textarea id="membership-company" name="company" required rows={3} />
+          </div>
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="membership-referredBy">
-            Referred By (SEEN LIFE Member Name)
-          </Label>
-          <Input id="membership-referredBy" name="referredBy" />
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="membership-company">
-          Company Associated with{" "}
-          <span className="font-normal text-muted-foreground">
-            (please fill complete detail)
-          </span>{" "}
-          <span aria-hidden className="text-destructive">*</span>
-        </Label>
-        <Textarea id="membership-company" name="company" required rows={3} />
+        <Separator orientation="horizontal" className="lg:hidden" />
+        <Separator orientation="vertical" className="hidden lg:block" />
+        <PaymentQrCard account={paymentAccount} className="lg:w-72 lg:shrink-0" />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
@@ -327,14 +340,16 @@ export function MembershipApplicationForm() {
         </p>
       ) : null}
 
-      <Button type="submit" size="lg" disabled={status === "loading"} className="w-full sm:w-auto">
-        {status === "loading" ? (
-          <Loader2 className="size-4 animate-spin" aria-hidden />
-        ) : (
-          <Send className="size-4" aria-hidden />
-        )}
-        Submit Application
-      </Button>
+      <div className="text-end">
+        <Button type="submit" size="lg" disabled={status === "loading"} className="w-full sm:w-auto">
+          {status === "loading" ? (
+            <Loader2 className="size-4 animate-spin" aria-hidden />
+          ) : (
+            <Send className="size-4" aria-hidden />
+          )}
+          Submit Application
+        </Button>
+      </div>
     </form>
   );
 }

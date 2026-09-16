@@ -3,6 +3,7 @@ import { executiveCommittee } from "./executive-committee";
 import { galleryAlbum } from "./gallery-album";
 import { officialDocument } from "./official-document";
 import { partner } from "./partner";
+import { paymentAccount } from "./payment-account";
 import { pastPresident } from "./past-president";
 import { post } from "./post";
 import { project } from "./project";
@@ -20,4 +21,5 @@ export const schemaTypes = [
   galleryAlbum,
   officialDocument,
   urgentNotice,
+  paymentAccount,
 ];

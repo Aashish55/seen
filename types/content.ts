@@ -98,3 +98,13 @@ export interface OfficialDocument {
   category: string;
   fileUrl?: string | null;
 }
+
+export interface PaymentAccount {
+  _id: string;
+  title: string;
+  qrImageUrl?: string | null;
+  accountName?: string;
+  accountNumber?: string;
+  bankName?: string;
+  instructions?: string;
+}
