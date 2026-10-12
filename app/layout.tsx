@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Lexend } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@/app/store-provider";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, baseKeywords } from "@/lib/site-config";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,14 +23,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
-  keywords: [
-    "electrical engineering",
-    "Nepal",
-    "SEEN",
-    "engineers society",
-    "power systems",
-    "renewable energy",
-  ],
+  keywords: baseKeywords,
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -11,9 +11,37 @@ export const siteConfig = {
   officeHours: "Sunday - Friday, 10:00 AM - 5:00 PM",
   social: {
     facebook: "https://www.facebook.com/profile.php?id=100064094952027",
-    linkedin: "#",
+    youtube: "https://www.youtube.com/@seennepal2861",
   },
 };
+
+/** Site-wide SEO keywords, reused as a base by every page's metadata. */
+export const baseKeywords = [
+  "SEEN",
+  "SEEN Nepal",
+  "seen",
+  "seen nepal",
+  "Society of Electrical Engineers Nepal",
+  "electrical engineers Nepal",
+  "electrical engineering Nepal",
+  "electrical nepal",
+  "electrical community Nepal",
+  "electrical community nepal",
+  "electrical society Nepal",
+  "electrical society nepal",
+  "electrical engineers society Nepal",
+  "electrical engineers association Nepal",
+  "Nepal electrical engineers association",
+  "professional electrical engineers Nepal",
+  "power engineers Nepal",
+  "power systems Nepal",
+  "renewable energy Nepal",
+  "electrical engineering association",
+  "engineers society Nepal",
+  "Kathmandu electrical engineers",
+  "NEC license Nepal",
+  "electrical engineering community",
+];
 
 export interface NavItem {
   label: string;

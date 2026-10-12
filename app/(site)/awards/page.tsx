@@ -2,11 +2,19 @@ import type { Metadata } from "next";
 import { Award, FlaskConical, Lightbulb, Medal, Trophy } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHeader } from "@/components/shared/page-header";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Awards & Honors",
   description:
     "SEEN awards recognizing excellence: Lifetime Achievement, Outstanding Engineer, Young Engineer, Innovation, and Best Research Paper.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN awards",
+    "electrical engineer awards Nepal",
+    "outstanding engineer award Nepal",
+    "young engineer award Nepal",
+  ],
 };
 
 const awards = [

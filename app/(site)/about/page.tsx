@@ -22,7 +22,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { ExecutiveCommitteeSection } from "@/components/shared/executive-committee-section";
 import { PageHeader } from "@/components/shared/page-header";
 import { SectionHeader } from "@/components/shared/section-header";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, baseKeywords } from "@/lib/site-config";
 import { sanityFetchList } from "@/sanity/fetch";
 import { executiveCommitteesQuery, pastPresidentsQuery } from "@/sanity/queries";
 import type { ExecutiveCommittee, PastPresident } from "@/types/content";
@@ -31,6 +31,14 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Learn about the Society of Electrical Engineers Nepal - our history, vision, mission, leadership, and chapters.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN history",
+    "SEEN vision mission",
+    "executive committee Nepal",
+    "past presidents SEEN",
+    "SEEN chapters",
+  ],
 };
 
 const objectives = [

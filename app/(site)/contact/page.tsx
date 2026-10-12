@@ -2,12 +2,18 @@ import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { FacebookIcon } from "@/components/shared/social-icons";
 import { PageHeader } from "@/components/shared/page-header";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with the Society of Electrical Engineers Nepal - address, email, phone, office hours, and contact form.",
+  keywords: [
+    ...baseKeywords,
+    "contact SEEN",
+    "SEEN Nepal office",
+    "SEEN address Kathmandu",
+  ],
 };
 
 const contactDetails = [

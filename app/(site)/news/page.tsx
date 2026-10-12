@@ -6,11 +6,19 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { sanityFetchList } from "@/sanity/fetch";
 import { allPostsQuery } from "@/sanity/queries";
 import type { NewsPost } from "@/types/content";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "News & Notices",
   description:
     "Latest news, notices, and announcements from the Society of Electrical Engineers Nepal.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN news",
+    "SEEN notices",
+    "electrical engineering news Nepal",
+    "electrical engineers announcements",
+  ],
 };
 
 export default async function NewsPage() {

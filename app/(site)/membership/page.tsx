@@ -17,11 +17,20 @@ import { formatMemberCount, getLifeMembers } from "@/lib/membership";
 import { sanityFetchOne } from "@/sanity/fetch";
 import { paymentAccountQuery } from "@/sanity/queries";
 import type { PaymentAccount } from "@/types/content";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Membership",
   description:
     "Life membership fee and eligibility for the Society of Electrical Engineers Nepal.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN membership",
+    "life membership Nepal",
+    "join electrical engineers society",
+    "electrical engineers membership Nepal",
+    "become a member SEEN",
+  ],
 };
 
 const membershipType = {

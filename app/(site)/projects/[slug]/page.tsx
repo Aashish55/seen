@@ -8,6 +8,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { RichText } from "@/components/shared/rich-text";
 import { sanityFetchOne } from "@/sanity/fetch";
 import { projectBySlugQuery } from "@/sanity/queries";
+import { baseKeywords } from "@/lib/site-config";
 import type { Project } from "@/types/content";
 
 interface Props {
@@ -25,6 +26,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: project.title,
     description: project.description,
+    keywords: [
+      ...baseKeywords,
+      project.title,
+      project.category ?? "",
+      project.location ?? "",
+      ...(project.technologies ?? []),
+    ].filter(Boolean),
     openGraph: project.imageUrl
       ? { images: [{ url: project.imageUrl }] }
       : undefined,
