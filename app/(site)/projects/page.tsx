@@ -6,11 +6,19 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { sanityFetchList } from "@/sanity/fetch";
 import { allProjectsQuery } from "@/sanity/queries";
 import type { Project } from "@/types/content";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Projects",
   description:
     "Featured electrical engineering projects supported by the Society of Electrical Engineers Nepal.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN projects",
+    "electrical engineering projects Nepal",
+    "power systems projects Nepal",
+    "rural electrification Nepal",
+  ],
 };
 
 export default async function ProjectsPage() {

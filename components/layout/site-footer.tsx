@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import {
   FacebookIcon,
-  LinkedinIcon,
+  YoutubeIcon,
 } from "@/components/shared/social-icons";
 import { siteConfig } from "@/lib/site-config";
 
@@ -53,11 +53,13 @@ export function SiteFooter() {
               <FacebookIcon />
             </a>
             <a
-              href={siteConfig.social.linkedin}
-              aria-label="SEEN on LinkedIn"
-              className="flex size-9 items-center justify-center rounded-md bg-white/10 transition-colors hover:bg-primary"
+              href={siteConfig.social.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="SEEN on Youtube"
+              className="flex size-9 items-center justify-center rounded-md bg-white/10 transition-colors hover:bg-[#FF0000]"
             >
-              <LinkedinIcon />
+              <YoutubeIcon />
             </a>
           </div>
         </div>

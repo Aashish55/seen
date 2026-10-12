@@ -6,11 +6,18 @@ import { galleryQuery } from "@/sanity/queries";
 import { EmptyState } from "@/components/shared/empty-state";
 import { GalleryGrid } from "@/components/gallery/gallery-grid";
 import type { GalleryAlbum } from "@/types/content";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Gallery",
   description:
     "Photos from SEEN events, conferences, site visits, workshops, and competitions.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN gallery",
+    "SEEN photos",
+    "electrical engineers events photos Nepal",
+  ],
 };
 
 export default async function GalleryPage() {

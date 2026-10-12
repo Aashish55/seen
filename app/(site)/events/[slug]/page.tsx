@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { sanityFetchOne } from "@/sanity/fetch";
 import { eventBySlugQuery } from "@/sanity/queries";
 import { formatDateRange } from "@/lib/format";
+import { baseKeywords } from "@/lib/site-config";
 import type { EventItem } from "@/types/content";
 
 interface Props {
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: event.title,
     description: event.description,
+    keywords: [...baseKeywords, event.title, event.location ?? ""].filter(Boolean),
     openGraph: event.imageUrl ? { images: [{ url: event.imageUrl }] } : undefined,
   };
 }

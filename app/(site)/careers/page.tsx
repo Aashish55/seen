@@ -4,11 +4,19 @@ import { ArrowRight, Briefcase, GraduationCap, School, Wrench } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHeader } from "@/components/shared/page-header";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Internship & Careers",
   description:
     "Internships, job opportunities, scholarships, and training programs for electrical engineers in Nepal.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN careers",
+    "electrical engineering jobs Nepal",
+    "electrical engineering internships Nepal",
+    "electrical engineering scholarships Nepal",
+  ],
 };
 
 const opportunities = [

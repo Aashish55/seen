@@ -7,11 +7,19 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { sanityFetchList } from "@/sanity/fetch";
 import { publicationsQuery } from "@/sanity/queries";
 import type { Publication } from "@/types/content";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Publications",
   description:
     "Newsletters, technical journals, research papers, annual reports, and conference proceedings from SEEN.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN publications",
+    "electrical engineering journal Nepal",
+    "SEEN newsletter",
+    "electrical engineering research Nepal",
+  ],
 };
 
 export default async function PublicationsPage() {

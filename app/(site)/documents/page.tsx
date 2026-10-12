@@ -7,11 +7,19 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { sanityFetchList } from "@/sanity/fetch";
 import { documentsQuery } from "@/sanity/queries";
 import type { OfficialDocument } from "@/types/content";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Documents",
   description:
     "Official SEEN documents - code of ethics, membership forms, standards, guidelines, policies, and annual reports.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN documents",
+    "electrical engineering standards Nepal",
+    "electrical codes Nepal",
+    "SEEN code of ethics",
+  ],
 };
 
 export default async function DocumentsPage() {

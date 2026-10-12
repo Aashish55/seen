@@ -11,11 +11,19 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHeader } from "@/components/shared/page-header";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Activities",
   description:
     "Technical seminars, workshops, conferences, webinars, industrial visits, competitions, and outreach programs by SEEN.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN activities",
+    "electrical engineering workshops Nepal",
+    "technical seminars Nepal",
+    "electrical engineering outreach Nepal",
+  ],
 };
 
 const activities = [

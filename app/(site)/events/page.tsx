@@ -7,11 +7,20 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { sanityFetchList } from "@/sanity/fetch";
 import { allPastEventsQuery, allUpcomingEventsQuery } from "@/sanity/queries";
 import type { EventItem } from "@/types/content";
+import { baseKeywords } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Events",
   description:
     "Seminars, workshops, conferences, and webinars organized by the Society of Electrical Engineers Nepal.",
+  keywords: [
+    ...baseKeywords,
+    "SEEN events",
+    "electrical engineering seminars Nepal",
+    "electrical workshops Nepal",
+    "electrical conferences Nepal",
+    "electrical webinars Nepal",
+  ],
 };
 
 export default async function EventsPage() {
