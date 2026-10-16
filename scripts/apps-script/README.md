@@ -20,7 +20,7 @@ those resources.
 
 1. Go to [script.google.com](https://script.google.com) and create a new
    standalone project (or open the existing one already deployed at the
-   `/exec` URL in `NEXT_PRIVATE_MEMBERSHIP_RESPONSE_FORM`).
+   `/exec` URL in `NEXT_MEMBERSHIP_RESPONSE_FORM`).
 2. Replace the project's `Code.gs` contents with this folder's `Code.gs`.
 3. Update the `CONFIG` object at the top if the target spreadsheet, sheet
    tab, or Drive folder ever changes:
@@ -40,9 +40,10 @@ those resources.
    - Who has access: **Anyone**
    - Click **Deploy** and authorize the script when prompted.
 6. Copy the deployment's **Web app URL** (ends in `/exec`).
-7. Set it as `NEXT_PRIVATE_MEMBERSHIP_RESPONSE_FORM` in `.env.local` (and in
+7. Set it as `NEXT_PUBLIC_MEMBERSHIP_RESPONSE_FORM` in `.env.local` (and in
    your hosting provider's environment variables for production), then
-   redeploy the site.
+   redeploy the site. It must use the `NEXT_PUBLIC_` prefix because the
+   form submits directly from the browser, not through the Next.js server.
 
 ## Notes
 

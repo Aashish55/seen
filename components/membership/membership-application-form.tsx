@@ -144,7 +144,7 @@ export function MembershipApplicationForm({ paymentAccount }: MembershipApplicat
       return;
     }
 
-    const endpoint = process.env.NEXT_PRIVATE_MEMBERSHIP_RESPONSE_FORM;
+    const endpoint = process.env.NEXT_MEMBERSHIP_RESPONSE_FORM;
     if (!endpoint) {
       setStatus("error");
       setErrorMessage(
