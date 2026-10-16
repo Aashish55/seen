@@ -19,7 +19,7 @@ export async function getLifeMembers(): Promise<{
   members: LifeMember[];
   count: number;
 }> {
-  const endpoint = process.env.NEXT_MEMBERSHIP_RESPONSE_FORM;
+  const endpoint = process.env.NEXT_PUBLIC_MEMBERSHIP_RESPONSE_FORM;
   if (!endpoint) {
     return { members: [], count: FALLBACK_MEMBER_COUNT };
   }
